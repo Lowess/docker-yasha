@@ -1,14 +1,14 @@
-FROM python:3.7 as builder
+FROM python:3.9 as builder
 
 # Install Yasha templating utility in virtualenv
 ENV PYTHONUSERBASE /venv
 RUN mkdir /venv \
-    && pip install --ignore-installed --user yasha==4.3
+    && pip install --ignore-installed --user yasha==5.0
 
-FROM python:3.7
+FROM python:3.9
 
 ENV PATH=$PATH:/venv/bin
-ENV PYTHONPATH=/venv/lib/python3.7/site-packages
+ENV PYTHONPATH=/venv/lib/python3.9/site-packages
 COPY --from=builder /venv /venv
 
 ENTRYPOINT ["yasha"]
